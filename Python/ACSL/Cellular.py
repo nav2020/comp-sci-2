@@ -24,7 +24,7 @@ class Grid:
 		grid[8][0] = 1
 		grid[8][9] = 1
 		grid[9][9] = 1
-	def getNumNeighbors(self,r,c):
+	def getNumAliveNeighbors(self,r,c):
 		numNeighbors = 0
 		if(r-1 > 0 and c-1 > 0):
 			if(grid[r-1][c-1] = 1):
