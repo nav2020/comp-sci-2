@@ -1,0 +1,44 @@
+package acsl.printFormat;
+import java.text.DecimalFormat;
+import java.util.*;
+public class PrintFormat {
+
+	/**
+	 * @author Drew Higgins
+	 * ACSL - Print Formatting (QA2)
+	 * 1/17/2014
+	 */
+	public static void main(String[] args) {
+		Scanner reader = new Scanner(System.in);
+		// int charNumber = 0, decIndex = 0;
+		// boolean decimal = false, commas = false;
+		
+		System.out.println("Enter your input: ");
+		String rawInput = reader.nextLine();
+		String input = rawInput.substring(0, rawInput.indexOf(','));
+		String valueStr = rawInput.substring(rawInput.indexOf(','));
+		valueStr = valueStr.trim();
+		input = input.trim();
+		
+		String format = input.replaceAll("&", "#");
+		double value = Double.parseDouble(valueStr);
+		
+		DecimalFormat formatter = new DecimalFormat(format);
+		String output = formatter.format(value);
+		System.out.println(value + " " + format + " " + output);
+		
+		/* // iterates through the string
+		for (int i = 0; i < input.length; i++){
+			char c = input.charAt(i);
+			if (c == '&') charNumber++; // counts place holders
+			if (c == ',') commas = true; // checks if there is a comma
+			if (c == '.'){
+				decIndex = i;
+				decimal = true;
+			}
+		} */
+		
+		
+	}
+
+}

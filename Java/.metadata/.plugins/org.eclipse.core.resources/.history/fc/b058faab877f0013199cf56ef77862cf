@@ -1,0 +1,40 @@
+package acsl.printFormat;
+import java.text.DecimalFormat;
+import java.util.*;
+public class PrintFormat {
+
+	/**
+	 * @author Drew Higgins
+	 * ACSL - Print Formatting (QA2)
+	 * 1/17/2014
+	 */
+	public static void main(String[] args) {
+		Scanner reader = new Scanner(System.in);
+		int charNum = 0, decIndex = 0, commaPos = 0;
+		boolean decimal = false, commas = false;
+		
+		System.out.println("Enter your input: ");
+		String rawInput = reader.nextLine();
+		for (int i = 0; i < rawInput.length(); i++){
+			char c = rawInput.charAt(i);
+			if (c == ','){
+				commaPos = i;
+			}
+		}
+		String input = rawInput.substring(0, commaPos);
+		String value = rawInput.substring(commaPos + 1);
+		
+		System.out.println(input + "  " + value);
+		// iterates through the string
+		for (int i = 0; i < input.length(); i++){
+			char c = input.charAt(i);
+			if (c == '&') charNum++; // counts place holders
+			if (c == ',') commas = true; // checks if there is a comma
+			if (c == '.'){
+				decIndex = i;
+				decimal = true;
+			}
+		}
+	}
+
+}

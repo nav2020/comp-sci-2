@@ -1,0 +1,77 @@
+package acsl.cells;
+import java.util.*;
+public class Cells {
+
+	/**
+	 * @author Drew Higgins
+	 * ACSL Cells Program
+	 * 10/28/2013
+	 */
+	public static void main(String[] args) {
+		Scanner reader = new Scanner(System.in);
+		String[] input = new String[5];
+		for(int i = 0; i < 5; i++){
+			System.out.println("Enter input line " +(i+1)+ ":");
+			input[i] = reader.nextLine();
+		}
+		for(int i = 0; i < 5; i++){
+			List<String> data = Arrays.asList(input[i].split(", "));
+			char datum = data.get(1).charAt(0);
+			switch(datum){
+			case 1: datum = 'D';
+				System.out.println(divide(data.get(1)));
+				break;
+			case 2: datum = 'A';
+				String temp = "" + data.get(1).charAt(3);
+				System.out.println(add(data.get(2), Integer.parseInt(temp)));
+				break;
+			case 3: datum = 'S';
+				String temp2 = "" + data.get(1).charAt(8);
+				System.out.println(subtract(data.get(2), Integer.parseInt(temp2)));
+				break;
+			case 4: datum = 'U';
+				System.out.println(union(data.get(2), data.get(3)));
+				break;
+			case 5: datum = 'I';
+				System.out.println(intersect(data.get(2), data.get(3)));
+				break;
+			}
+		}
+	}
+	
+	public static String alphabetize(String s){
+		char[] chars = s.toCharArray();
+        Arrays.sort(chars);
+        String sorted = new String(chars);
+        return sorted;
+	}
+
+	public static String divide(String s){
+		String part1 = s.substring(0,4);
+		String part2 = s.substring(4);
+		return part1+part1 + " and " +part2+part2;
+	}
+	public static String add(String s, int x){
+		String toReplicate = s.substring(0,x);
+		String sorted = alphabetize(toReplicate);
+        String full = toReplicate + sorted + s.substring(x);
+        return full.substring(0,8);
+	}
+	public static String subtract(String s, int x){
+		String afterDeletion = s.substring(x);
+		String toReplicate = s.substring(8-x, 8);
+		String sorted = alphabetize(toReplicate);
+		String full = afterDeletion + sorted;
+		return full.substring(0, 8);
+	}
+	public static String union(String s, String a){
+		String s1 = s.substring(4);
+		String s2 = s.substring(0,4);
+		return alphabetize(s1) + alphabetize(s2);
+	}
+	public static String intersect(String s, String a){
+		String s1 = s.substring(0,2) + s.substring(6);
+		String s2 = a.substring(0,2) + a.substring(6);
+		return alphabetize(s1) + alphabetize(s2);
+	}
+}

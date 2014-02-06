@@ -1,0 +1,28 @@
+package acsl.printFormat;
+import java.util.*;
+public class PrintFormat {
+
+	/**
+	 * @author Drew Higgins
+	 * ACSL - Print Formatting (QA2)
+	 * 1/17/2014
+	 */
+	public static void main(String[] args) {
+		Scanner reader = new Scanner(System.in);
+		int charNumber = 0;
+		boolean commas = false;
+		String output = "";
+		
+		System.out.println("Enter your input: ");
+		String input = reader.nextLine();
+		
+		// iterates through the string
+		for (char c : input.toCharArray()){
+			if (c == '&') charNumber++; // counts place holders
+			if (c == ',') commas = true; // checks if there is a comma
+		}
+		
+		
+	}
+
+}

@@ -1,0 +1,89 @@
+package acsl.printFormat;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class PrintFormat {
+	public static void main(String[] args) {
+		boolean comma = false, exponential = false, dollar = false, asterisk = false, done = false;
+		String output="";
+		Scanner reader = new Scanner(System.in);
+		System.out.println("Enter your input: ");
+		String rawInput = reader.nextLine();
+		
+		// finds the location of the last comma in the input string
+		int commaPos = 0;
+		for (int i = 0; i < rawInput.length(); i++){
+			if (rawInput.charAt(i) == ','){
+				commaPos = i;
+			}
+		}
+		// splits the input into the formatting and the number value
+		String format = rawInput.substring(0,commaPos);
+		String valueStr = rawInput.substring(commaPos+1);
+		
+		// checks for triggers in the format string
+		for (int i = 0; i < format.length(); i++){
+			char c = format.charAt(i);
+			if(c == 'E') exponential = true;
+			if(c == ',') comma = true;
+			if(c == '$') dollar = true;
+			if(c == '*'){
+				asterisk = true;
+				format = format.substring(i+2);
+			}
+		}
+		
+		double value = Double.parseDouble(valueStr);
+		if(comma){
+			for(int i = format.length()-1; i > 0; i-=3){
+				format = format.substring(0,i) + "," + format.substring(i);
+			}
+		}
+		if(exponential){
+			format = format.substring(0, format.indexOf('E')).replaceAll("&","0");
+			format = format.substring(0,format.length()-1);
+			format += "E0";
+			format = "0." + format;
+			DecimalFormat df = new DecimalFormat(format);
+			df.setRoundingMode(RoundingMode.HALF_UP);
+			output = df.format(value);
+			done = true;
+		}
+		if(dollar && !asterisk){
+			format = format.replaceAll("&", "#");
+			DecimalFormat formatter = new DecimalFormat(format);
+			formatter.setRoundingMode(RoundingMode.HALF_UP);
+			output = formatter.format(value);
+			done = true;
+		}
+		if(!done){
+			format = format.replaceAll("&", "0");
+			DecimalFormat formatter = new DecimalFormat(format);
+			formatter.setRoundingMode(RoundingMode.HALF_UP);
+			output = formatter.format(value);
+			output = toAsterisk(0, output);
+			System.out.println(output);
+		}
+		if(asterisk){
+			int q = 0;
+			do{
+				q++;
+			}while(output.charAt(q) != '*');
+			output = output.substring(0,q) + "$" + output.substring(q);
+		}
+		System.out.println(output);
+	}
+	// x is the initial index of the string, s is the string you want to modify
+	public static String toAsterisk(int x, String s){
+		char[] o = s.toCharArray();
+		for(int i = x; o[i] == '0'; i++){
+			o[i] = '*';
+		}
+		String out = "";
+		for(char c : o){
+			out += c;
+		}
+		return out;
+	}
+}

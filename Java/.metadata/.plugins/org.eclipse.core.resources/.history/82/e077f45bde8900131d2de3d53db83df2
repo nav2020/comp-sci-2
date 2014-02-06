@@ -1,0 +1,23 @@
+package extraCredit;
+import java.util.*;
+public class Rando {
+	public static void main(String args[]){
+		int sixOrMore = 0;
+		for(int i = 0; i < 1000000; i++){
+			int highestStreak = 0;
+			int streak = 0;
+			for(int j = 0; j < 20; j++){
+				int rand = (int) (100*Math.random());
+				if(rand % 2 == 0){
+					streak++;
+				}
+				else{
+					if(streak>highestStreak) highestStreak = streak;
+					streak = 0;
+				}
+			}
+			if(highestStreak>=6) sixOrMore++;
+		}
+		System.out.println((sixOrMore/1000000.0)*100);
+	}
+}

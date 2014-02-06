@@ -1,0 +1,51 @@
+import java.util.*;
+
+public class WordPalindrome {
+
+	/**
+	 * @author Drew Higgins
+	 * Word Palindrome EC Problem
+	 * 11/12/13
+	 */
+	public static void main(String[] args) {
+		Scanner reader = new Scanner(System.in);
+		System.out.println("Enter the sentence you want to check:");
+		String input = reader.nextLine();
+		
+		List<String> words = Arrays.asList(input.split(" "));
+		for(String w : words){
+			w = w.toUpperCase();
+			w = w.trim();
+		}
+		int j = words.size() - 1;
+		boolean works = true;
+		for(int i = 0; i < words.size() && j >= 0 && works; i++){
+			if(!(words.get(i).equals(words.get(j)))){
+				works = false;
+			}
+			j--;
+		}
+		if(words.size() % 2 != 0){
+			String middleWord = words.get(words.size() / 2);
+			System.out.println(middleWord);
+			char[] middleWordLetters = middleWord.toCharArray();
+			int y = words.size() - 1;
+			boolean works2 = true;
+			for(int x = 0; x < middleWordLetters.length && y >= 0 && works2; x++){
+				if(!(middleWordLetters[x] == middleWordLetters[y])){
+					works2 = false;
+				}
+				j--;
+			}
+			if(!works2){
+				works = false;
+			}
+		}
+		if(works){
+			System.out.println("It IS a palindromic sentence! :)");
+		}
+		else{
+			System.out.println("It is NOT a palindromic sentence! :(");
+		}
+	}
+}

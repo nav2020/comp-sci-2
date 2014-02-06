@@ -1,0 +1,57 @@
+package acsl.factorTree;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class FactorTrees {
+	public static void main(String args[]) {
+		Scanner reader = new Scanner(System.in);
+		int[] input = new int[10];
+		for (int i = 0; i < 10; i++){
+			System.out.println("Enter number " +(i+1)+": ");
+			input[i] = reader.nextInt();
+		}
+		for (int j = 0; j < 10; j++){
+			System.out.println(factorInt(j));
+		}
+		
+	}
+
+	public static boolean isPrime(int a) {
+		for (int i = 2; i < a; i++) {
+			if (a % i == 0) {
+				return false;
+			}
+		}
+		return false;
+	}
+	
+	public static String factorInt(int x){
+		ArrayList<Integer> factors = new ArrayList<Integer>();
+		String output = null;
+		for(int i = 1; i < x; i++){
+			if(x % i == 0){
+				factors.add(x - x/i);
+				factors.add(x/i);
+				for(int j : factors){
+					output += j;
+					if(!isPrime(j)){
+						factorInt(j);
+					}
+					if(factors.size() - 1 != j){
+						output += " x ";
+					}
+				}
+			}
+		}
+		return output;
+	}
+	public static boolean isCompletelyFactored(ArrayList<Integer> a){
+		for(int i : a){
+			if(!isPrime(i)){
+				return false;
+			}
+		}
+		return true;
+	}
+}

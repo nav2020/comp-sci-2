@@ -1,0 +1,33 @@
+import java.util.*;
+public class Arrays_22 {
+	public static void main(String[] args) {
+		int[] accountNumbers = {1,2,3,4,5};
+		String[] names = {"Bob Marks", "Lisa Pappo", "Eric Fisher", "James Finch", "Chris McCormick"};
+		double[] balances = {1000000,50000,5,180000,725000};
+		
+		int mostMoney =0, leastMoney = Integer.MAX_VALUE;
+		double avg = 0;
+		for(int i = 0; i < 5; i++){
+			if(balances[i] > mostMoney){
+				mostMoney = i;
+			}
+			else if(balances[i] < leastMoney){
+				leastMoney = i;
+			}
+			avg += balances[i];
+		}
+		avg /= balances.length;
+		
+		/*String[] firstNames = new String[5];
+		String[] lastNames = new String[5];
+		
+		for (int i = 0; i < 5; i++){
+			
+		}*/
+		
+		System.out.println(names[mostMoney] + " has the most money in their account");
+		System.out.println(names[leastMoney] + " has the least money in their account");
+		System.out.println("The avergae account contains $" + avg);
+		System.out.println(" is alphabetically first");
+	}
+}
