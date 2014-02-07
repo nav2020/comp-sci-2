@@ -59,6 +59,6 @@ class Grid:
 # Main
 g = Grid()
 # input_data = input("Enter input: ")
-input_data = [2, 2, 4, 2, 3, 4, 1, 5, 2]
-rules = [input_data[i] for i in range(1, input_data[0] + 1)]
-print rules
+#input_data = [2, 2, 4, 2, 3, 4, 1, 5, 2]
+#rules = [input_data[i] for i in range(1, input_data[0] + 1)]
+g.printGrid()
