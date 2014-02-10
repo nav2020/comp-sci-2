@@ -25,30 +25,32 @@ class Grid:
 		grid[8][9] = 1
 		grid[9][9] = 1
 	def getNumAliveNeighbors(self,r,c):
+		r=r-1
+		c=c-1
 		numNeighbors = 0
 		if(r-1 > 0 and c-1 > 0):
-			if(grid[r-1][c-1] = 1):
+			if(grid[r-1][c-1] == 1):
 				numNeighbors+=1
 		if(c-1 > 0):
-			if(grid[r][c-1] = 1):
+			if(grid[r][c-1] == 1):
 				numNeighbors+=1
 		if(r+1 < 9 and c-1 > 0):
-			if(grid[r+1][c-1] = 1):
+			if(grid[r+1][c-1] == 1):
 				numNeighbors+=1
 		if(r-1 > 0 and c > 0):
-			if(grid[r-1][c] = 1):
+			if(grid[r-1][c] == 1):
 				numNeighbors+=1
 		if(r+1 < 9):
-			if(grid[r+1][c] = 1):
+			if(grid[r+1][c] == 1):
 				numNeighbors+=1
 		if(r-1 > 0 and c+1 < 9):
-			if(grid[r-1][c+1] = 1):
+			if(grid[r-1][c+1] == 1):
 				numNeighbors+=1
 		if(c+1 < 9):
-			if(grid[r][c+1] = 1):
+			if(grid[r][c+1] == 1):
 				numNeighbors+=1
 		if(r+1 < 9 and c+1 < 9):
-			if(grid[r+1][c+1] = 1):
+			if(grid[r+1][c+1] == 1):
 				numNeighbors+=1
 		return numNeighbors
 	def printGrid(self):
@@ -62,3 +64,4 @@ g = Grid()
 #input_data = [2, 2, 4, 2, 3, 4, 1, 5, 2]
 #rules = [input_data[i] for i in range(1, input_data[0] + 1)]
 g.printGrid()
+print str(g.getNumAliveNeighbors(2,5))
