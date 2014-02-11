@@ -58,10 +58,21 @@ class Grid:
 			print ""
 			for c in r:
 				print str(c) + " ",
+	def getCellState(self,r,c):
+		if(grid[r][c] == 1):
+			return "A"
+		else:
+			return "D"
 # Main
 g = Grid()
-# input_data = input("Enter input: ")
-#input_data = [2, 2, 4, 2, 3, 4, 1, 5, 2]
-#rules = [input_data[i] for i in range(1, input_data[0] + 1)]
-g.printGrid()
-print str(g.getNumAliveNeighbors(2,5))
+
+#input_data = input("Enter input: ")
+input_data = [3, 1, 2, 3, 3, 1, 2, 3, 2, 5, 10]
+target_cell = [input_data[i] for i in range((len(input_data) - 2),len(input_data))]
+rules_birth = [input_data[i] for i in range(1, input_data[0] + 1)]
+begin_surv = input_data[0] +2
+end_surv = input_data[0] + 2 + input_data[input_data[0] + 1]
+rules_surv = [input_data[i] for i in range(begin_surv,end_surv)]
+num_generations = input_data[end_surv]
+
+print target_cell, rules_birth, rules_surv, num_generations
