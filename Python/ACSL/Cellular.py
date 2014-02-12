@@ -59,15 +59,34 @@ class Grid:
 			for c in r:
 				print str(c) + " ",
 	def getCellState(self,r,c):
+		r=r-1
+		c=c-1
 		if(grid[r][c] == 1):
 			return "A"
 		else:
 			return "D"
+	def checkForBirth(self,r,c,rules):
+		r=r-1
+		c=c-1
+		for x in rules:
+			if(self.getNumAliveNeighbors(r,c) == x):
+				grid[r][c] = 1
+				break
+	def checkSurv(self,r,c,rules):
+		r=r-1
+		c=c-1
+		for x in rules:
+			if(self.getNumAliveNeighbors(r,c) == x):
+				grid[r][c] = 1
+				break
+			else:
+				grid[r][c] = 0
+
 # Main
 g = Grid()
 
 #input_data = input("Enter input: ")
-input_data = [3, 1, 2, 3, 3, 1, 2, 3, 2, 5, 10]
+input_data = [2, 2, 4, 2, 3, 4, 1, 5, 2]
 target_cell = [input_data[i] for i in range((len(input_data) - 2),len(input_data))]
 rules_birth = [input_data[i] for i in range(1, input_data[0] + 1)]
 begin_surv = input_data[0] +2
@@ -76,3 +95,14 @@ rules_surv = [input_data[i] for i in range(begin_surv,end_surv)]
 num_generations = input_data[end_surv]
 
 print target_cell, rules_birth, rules_surv, num_generations
+
+while(num_generations >= 0):
+	for i in range(10):
+		for j in range(10):
+			if(grid[i][j] == 1):
+				g.checkSurv(i,j,rules_surv)
+			else:
+				g.checkForBirth(i,j,rules_birth)
+	g.printGrid()
+	print g.getCellState(target_cell[0],target_cell[1])
+	num_generations-=1
