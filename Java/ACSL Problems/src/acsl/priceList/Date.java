@@ -19,6 +19,7 @@ public class Date {
     }
 
     public int convertMonthToInt(String m) {
+        m = m.toUpperCase();
         if(m == "JAN") return 1;
         else if(m == "FEB") return 2;
         else if(m == "MAR") return 3;
