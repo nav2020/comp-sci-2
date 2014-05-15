@@ -10,6 +10,12 @@ public class Price {
         this.price = Double.parseDouble(price);
     }
 
+    public Price(String price) {
+        this.startDate = new Date(1, 1);
+        this.endDate = new Date(6, 30);
+        this.price = Double.parseDouble(price);
+    }
+
     public Date getStartDate() {
         return startDate;
     }
